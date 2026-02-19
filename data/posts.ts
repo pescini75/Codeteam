@@ -1,0 +1,86 @@
+import { BlogPost } from '../types';
+
+// =================================================================================
+// DATABASE POST DEL BLOG
+// =================================================================================
+// Per aggiungere un post permanente:
+// 1. Usa il generatore nell'area riservata (icona Lucchetto nel footer)
+// 2. Copia il JSON generato
+// 3. Incolla il JSON in fondo a questa lista, prima della parentesi quadra '];'
+// =================================================================================
+
+export const blogPosts: BlogPost[] = [
+  {
+    id: 1,
+    title: "Il futuro del Web Assembly",
+    excerpt: "Come Web Assembly sta cambiando il modo in cui scriviamo applicazioni web ad alte prestazioni nel browser.",
+    content: `WebAssembly (Wasm) non è solo una nuova tecnologia; è un cambio di paradigma fondamentale per il web. Per anni, JavaScript è stato l'unico cittadino di prima classe nei browser. Ora, Wasm permette di eseguire codice compilato da linguaggi come C++, Rust e Go a velocità quasi native.\n\nImmagina di poter portare intere suite di editing video, motori di gioco 3D complessi o algoritmi di analisi dati direttamente nel browser, senza dipendere da server backend costosi. Questo è ciò che WebAssembly rende possibile oggi.\n\nIn CodeTeam stiamo già sperimentando con moduli Rust compilati in Wasm per gestire l'elaborazione di immagini lato client, riducendo il carico sui server del 40% e migliorando la privacy degli utenti, poiché i dati non lasciano mai il loro dispositivo via rete.`,
+    imageUrl: "https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2000&auto=format&fit=crop",
+    date: "15 Ottobre 2023",
+    readTime: "5 min",
+    tags: ["Performance", "Web", "Rust"]
+  },
+  {
+    id: 2,
+    title: "Microservizi vs Monolite",
+    excerpt: "Un'analisi approfondita su quando conviene spezzare la tua applicazione e quando invece il monolite è la scelta giusta.",
+    content: `Il dibattito tra architettura a microservizi e monolitica è uno dei più accesi nel mondo dello sviluppo software. Spesso si tende a pensare che i microservizi siano sempre la soluzione migliore, ma la realtà è molto più sfumata.\n\nUn monolite ben strutturato è spesso la scelta ideale per le startup o per prodotti in fase iniziale. Offre semplicità di deployment, debugging facilitato e performance di rete ottimali (zero latenza tra chiamate di funzione). Tuttavia, quando il team scala oltre le 20-30 persone, il monolite diventa un collo di bottiglia.\n\nI microservizi offrono scalabilità organizzativa e tecnica, permettendo a team diversi di lavorare su stack tecnologici diversi. Il costo? Una complessità operativa esponenziale. Serve un'infrastruttura solida di CI/CD, monitoraggio distribuito e gestione dei fallimenti di rete.`,
+    imageUrl: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop",
+    date: "02 Novembre 2023",
+    readTime: "8 min",
+    tags: ["Backend", "Scalability", "DevOps"]
+  },
+  {
+    id: 3,
+    title: "Ottimizzare React per la velocità",
+    excerpt: "Tecniche avanzate di memoizzazione e rendering per garantire un'esperienza utente fulminea.",
+    content: `React è veloce di natura, ma applicazioni complesse possono rallentare facilmente se non si presta attenzione al ciclo di rendering. Il Virtual DOM fa un ottimo lavoro, ma ricalcolare l'intero albero dei componenti ad ogni tasto premuto è uno spreco di risorse.\n\nUtilizzare React.memo, useMemo e useCallback non è solo "zucchero sintattico", ma è fondamentale per prevenire re-render inutili. Un altro aspetto cruciale è la virtualizzazione delle liste: quando si devono mostrare migliaia di elementi, renderizzarli tutti insieme bloccherà il browser. Librerie come react-window permettono di renderizzare solo ciò che è visibile nel viewport.\n\nInoltre, il Code Splitting tramite React.lazy permette di caricare il codice JavaScript solo quando serve, riducendo drasticamente il Time to Interactive (TTI) iniziale.`,
+    imageUrl: "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2000&auto=format&fit=crop",
+    date: "10 Dicembre 2023",
+    readTime: "6 min",
+    tags: ["JavaScript", "Optimization", "UX"]
+  },
+  {
+    id: 4,
+    title: "Sicurezza nelle API REST",
+    excerpt: "Best practices per proteggere i tuoi endpoint: autenticazione, rate limiting e validazione input.",
+    content: `La sicurezza delle API non è una feature, è un requisito fondamentale. Esporre un endpoint pubblico significa esporre la logica di business al mondo intero. Le vulnerabilità più comuni non sono bug complessi, ma configurazioni errate.\n\nIl primo passo è sempre l'autenticazione robusta (OAuth2 o JWT). Ma non basta. Il Rate Limiting è essenziale per prevenire attacchi DDoS e brute-force. Validare rigorosamente ogni input in ingresso (mai fidarsi del client!) previene SQL Injection e XSS.\n\nInfine, utilizzare HTTPS ovunque e implementare header di sicurezza corretti (CORS, CSP) crea un ulteriore livello di difesa. Ricorda: la sicurezza è un processo, non un prodotto.`,
+    imageUrl: "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2000&auto=format&fit=crop",
+    date: "15 Gennaio 2024",
+    readTime: "7 min",
+    tags: ["Backend", "API", "CyberSec"]
+  },
+  {
+    id: 5,
+    title: "L'ascesa dell'AI nel Coding",
+    excerpt: "Come strumenti come Copilot e ChatGPT stanno cambiando il flusso di lavoro quotidiano degli sviluppatori.",
+    content: `L'intelligenza artificiale non sostituirà i programmatori, ma i programmatori che usano l'AI sostituiranno quelli che non lo fanno. Strumenti come GitHub Copilot agiscono come "pair programmer" instancabili, suggerendo boilerplate, test unitari e persino refactoring complessi.\n\nLa chiave è capire che questi strumenti sono assistenti, non oracoli. Il codice generato va sempre revisionato. Tuttavia, la produttività aumenta drasticamente: il tempo speso a cercare su StackOverflow diminuisce, lasciando più spazio al pensiero architetturale e alla risoluzione di problemi di business complessi.\n\nStiamo assistendo alla democratizzazione dello sviluppo software, dove la barriera all'ingresso si abbassa, ma la richiesta di competenze di alto livello per orchestrare questi sistemi aumenta.`,
+    imageUrl: "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2000&auto=format&fit=crop",
+    date: "22 Gennaio 2024",
+    readTime: "4 min",
+    tags: ["AI", "Productivity", "Future"]
+  },
+  {
+    id: 6,
+    title: "Design System Scalabili",
+    excerpt: "Creare un linguaggio visivo coerente che cresce insieme al tuo prodotto e al tuo team.",
+    content: `Un Design System è molto più di una libreria di componenti UI in Figma o React. È il linguaggio comune che permette a designer e sviluppatori di comunicare senza ambiguità. Definisce non solo l'aspetto (colori, tipografia, spaziature), ma anche il comportamento e le regole di utilizzo.\n\nCreare un sistema scalabile significa partire dai "token" (le particelle elementari del design) per costruire componenti atomici, che poi formano molecole e organismi complessi. Questo approccio atomico garantisce che, se domani decidi di cambiare il colore primario del brand, la modifica si propaghi istantaneamente in tutta l'applicazione senza dover cercare e sostituire manualmente codici esadecimali in centinaia di file.`,
+    imageUrl: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000&auto=format&fit=crop",
+    date: "05 Febbraio 2024",
+    readTime: "6 min",
+    tags: ["UI/UX", "Frontend", "Workflow"]
+  },
+  {
+    id: 7,
+    title: "Evoluzione di Gemini 3",
+    excerpt: "Evoluzione di Gemini 3: incredibile, ci sostituirà",
+    content: `Integrazione di applicazioni: operiamo sul software già esistente senza necessità di rivoluzionare o cambiare nulla. Il lavoro di integrazione consente una molteplicità di azioni sui dati già presenti in azienda e derivanti dalle gestioni più diversificate. Possiamo leggere tali dati e creare applicazioni ad hoc che li vadano a trattare: pubblicare servizi web, estrapolare i dati per logiche di datawarehousing, utilizzare prodotti e dati di magazzino per gestire vendite on line, cruscotti amministrativi e statistici. Affianchiamo programmi che lavorano su dati esistenti. E lo facciamo multipiattaforma e multidevice: web, desktop, mobile. Progettiamo il software in modo che possa essere fruito ed utilizzato su devices differenti e a differenti livelli: progettiamo software che in modo trasparente si adattaino al device in uso (Responsività e Web apps) , oppure possono essere realizzati software ad hoc per la piattaforma specifica (Mobile apps). Grazie ai nostri tool di sviluppo avanzati “industrial” oriented” realizziamo software su qualunque database relazionale (Oracle, Microsoft SQL, MySql, PostreSQL, Informix, DB2400, DB2Universal DB) e su piattaforme Windows e Linux.`,
+    imageUrl: "https://i.ytimg.com/vi/MPjOQIQO8eQ/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLB1Mj0S9JJvIyeDhiQpyAtmcyAMYA",
+    date: "16 dicembre 2025",
+    readTime: "5 min",
+    tags: ["Tech"]
+  },
+  
+  // INCOLLA QUI SOTTO I NUOVI POST COPIATI DAL GENERATORE
+  
+];
