@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TeamMember } from '../types';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 
-const teamMembers: TeamMember[] = [
+export const teamMembers: TeamMember[] = [
   {
     id: 5,
     name: "Stefano Pescini",
@@ -10,7 +10,7 @@ const teamMembers: TeamMember[] = [
     imageUrl: "https://www.codeteam.it/wp-content/uploads/2014/05/Stefano-270x270.png",
     description: `Cofondatore del progetto Codeteam. Analista e sviluppatore web si occupa principalmente di sviluppo di web e mobile applications gestionali, siti web e portali utilizzando differenti strumenti. Vanta profonda esperienza nell’uso del tool di sviluppo Genexus, nell’uso del linguaggio .Net e Visual studio, Java su Eclipse, soluzioni CMS come Wodpress e Magento e conosce approfonditamente i maggiori database relazionali presenti sul mercato: Microsoft SQL server, MySql, Oracle e PostgresSQL. La sua filosofia è che un ottimo programma web parta dall’integrazione perfetta delle due componenti principali: potenti logiche lato server e potenza nelle interfacce lato client. Linguaggi lato server, User Experience, Web usability, Peformances e Sicurezza devono combaciare perfettamente. Ha approfondita conoscenza di C, C++, C#, Java, HTML 5 e Css3, e tecnologie quali Ajax e Jquery. Si occupa anche di ricerca e sviluppo per Codeteam cercando sempre soluzioni innovative nell’ambito del web in una ottica di integrazione aziendale , integrazione dei sistemi, innovazione orientata all’uso massiccio del web , del cloud computing, e all’uso di soluzioni mobile per le quali sfrutta da tempo anche gli SDK nativi: Android SDK e iOS SDK.
 
-Vanta un’ottima conoscenza del Tool di sviluppo Genexus per il quale ha svolto per 14 anni anche l’attività di formazione alle aziende per conto del distributore nazionale del tool di sviluppo. Considera Genexus il tool di punta del progetto Codeteam per le enorme potenzialità fornite.
+Vanta un’ottima conoscenza del Tool di sviluppo Genexus per il quale ha svolto per 14 anni anche l'attività di formazione alle aziende per conto del distributore nazionale del tool di sviluppo. Considera Genexus il tool di punta del progetto Codeteam per le enorme potenzialità fornite.
 
 La sua filosofia è: “Innovare, evolvere e scegliere sempre soluzioni nuove da proporre. Nel mondo dell’informatica, l’altro ieri è ormai preistoria.”`,
     linkedinUrl: "https://www.linkedin.com/in/stefano-pescini-24687217b",
@@ -92,7 +92,7 @@ const Team: React.FC<TeamProps> = ({ onMemberClick }) => {
   }, []);
 
   const totalPages = Math.ceil(teamMembers.length / itemsPerPage);
-  
+
   const handlePrev = () => {
     setCurrentPage((prev) => (prev === 0 ? totalPages - 1 : prev - 1));
   };
@@ -110,12 +110,12 @@ const Team: React.FC<TeamProps> = ({ onMemberClick }) => {
     <section id="team" className="py-24 relative bg-slate-900/50 overflow-hidden">
       {/* Decorative slant */}
       <div className="absolute inset-0 transform -skew-y-2 origin-top-left bg-slate-900/50 -z-10"></div>
-      
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-base text-brand-500 font-semibold tracking-wide uppercase">Il Team</h2>
+          <h2 className="text-base text-brand-500 font-semibold tracking-wide uppercase">Il Team di Esperti</h2>
           <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
-            Le menti dietro ai progetti
+            Le menti dietro ai sistemi CodeTeam
           </p>
           <p className="mt-4 max-w-2xl text-xl text-slate-400 mx-auto">
             Clicca sui membri del team per scoprire di più sulla loro esperienza.
@@ -124,18 +124,18 @@ const Team: React.FC<TeamProps> = ({ onMemberClick }) => {
 
         {/* Carousel Container */}
         <div className="relative min-h-[500px]">
-          
+
           {/* Navigation Buttons (Hidden if only 1 page) */}
           {totalPages > 1 && (
             <>
-              <button 
+              <button
                 onClick={handlePrev}
                 className="absolute left-0 top-1/2 -translate-y-1/2 -ml-4 lg:-ml-16 xl:-ml-20 z-20 p-3 rounded-full bg-slate-800/80 backdrop-blur text-white hover:bg-brand-500 hover:text-white transition-all shadow-xl border border-slate-700"
                 aria-label="Previous page"
               >
                 <ChevronLeft className="w-8 h-8" />
               </button>
-              <button 
+              <button
                 onClick={handleNext}
                 className="absolute right-0 top-1/2 -translate-y-1/2 -mr-4 lg:-mr-16 xl:-mr-20 z-20 p-3 rounded-full bg-slate-800/80 backdrop-blur text-white hover:bg-brand-500 hover:text-white transition-all shadow-xl border border-slate-700"
                 aria-label="Next page"
@@ -147,13 +147,13 @@ const Team: React.FC<TeamProps> = ({ onMemberClick }) => {
 
           {/* Grid Layout - Optimized responsiveness */}
           <div className="transition-all duration-500 ease-in-out">
-            <div 
-                key={`${currentPage}-${itemsPerPage}`} 
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 animate-fade-in"
+            <div
+              key={`${currentPage}-${itemsPerPage}`}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 animate-fade-in"
             >
               {visibleMembers.map((member) => (
-                <div 
-                  key={member.id} 
+                <div
+                  key={member.id}
                   onClick={() => onMemberClick(member)}
                   className="group flex flex-col items-center text-center cursor-pointer"
                 >
@@ -161,23 +161,23 @@ const Team: React.FC<TeamProps> = ({ onMemberClick }) => {
                   <div className="relative mb-8">
                     <div className="absolute inset-0 bg-brand-500 rounded-full blur-xl opacity-0 group-hover:opacity-30 transition-opacity duration-500"></div>
                     <div className="w-56 h-56 sm:w-64 sm:h-64 lg:w-60 lg:h-60 xl:w-72 xl:h-72 relative rounded-full overflow-hidden border-4 border-slate-800 group-hover:border-brand-500 transition-all duration-500 shadow-2xl">
-                        <img 
-                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700" 
-                          src={member.imageUrl} 
-                          alt={member.name} 
-                        />
-                        {/* Subtle overlay on hover */}
-                        <div className="absolute inset-0 bg-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                      <img
+                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                        src={member.imageUrl}
+                        alt={member.name}
+                      />
+                      {/* Subtle overlay on hover */}
+                      <div className="absolute inset-0 bg-brand-500/10 opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     </div>
                   </div>
 
                   {/* Content Section */}
                   <div className="transform transition-transform duration-300 group-hover:-translate-y-1">
                     <h3 className="text-xl font-bold text-white mb-2 leading-tight group-hover:text-brand-500 transition-colors">
-                        {member.name}
+                      {member.name}
                     </h3>
                     <p className="text-slate-400 text-xs font-bold uppercase tracking-[0.2em] mb-3">
-                        {member.role.split(',')[0]}
+                      {member.role.split(',')[0]}
                     </p>
                     <div className="w-8 h-1 bg-brand-500/30 mx-auto rounded-full group-hover:w-16 group-hover:bg-brand-500 transition-all duration-300"></div>
                   </div>
@@ -193,9 +193,8 @@ const Team: React.FC<TeamProps> = ({ onMemberClick }) => {
                 <button
                   key={idx}
                   onClick={() => setCurrentPage(idx)}
-                  className={`h-2.5 rounded-full transition-all duration-500 ${
-                    currentPage === idx ? 'w-10 bg-brand-500' : 'w-2.5 bg-slate-700 hover:bg-slate-600'
-                  }`}
+                  className={`h-2.5 rounded-full transition-all duration-500 ${currentPage === idx ? 'w-10 bg-brand-500' : 'w-2.5 bg-slate-700 hover:bg-slate-600'
+                    }`}
                   aria-label={`Go to page ${idx + 1}`}
                 />
               ))}

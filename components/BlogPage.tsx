@@ -68,7 +68,7 @@ const BlogPage: React.FC<BlogPageProps> = ({ posts, onPostClick, onBack, onConta
   }, [posts]);
 
   return (
-    <section className="min-h-screen pt-24 pb-20 relative z-20 bg-slate-950">
+    <section className="min-h-screen pt-24 pb-20 relative z-10">
       <CodeWatermark />
 
       <div className="relative">

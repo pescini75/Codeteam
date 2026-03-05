@@ -27,21 +27,21 @@ const values = [
 
 const Philosophy: React.FC = () => {
   return (
-    <section id="philosophy" className="py-24 relative bg-slate-950 overflow-hidden">
+    <section id="filosofia" className="py-24 relative bg-slate-950 overflow-hidden">
       {/* Background abstract elements */}
       <div className="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-brand-900/10 rounded-full blur-3xl pointer-events-none"></div>
       <div className="absolute bottom-0 left-0 -ml-20 -mb-20 w-80 h-80 bg-blue-900/10 rounded-full blur-3xl pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
+
           {/* Text Content */}
           <div>
             <div className="inline-flex items-center space-x-2 bg-slate-900 border border-slate-800 rounded-full px-4 py-1.5 mb-6">
-               <span className="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
-               <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
-                  Il nostro DNA
-               </span>
+              <span className="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></span>
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                Il nostro DNA
+              </span>
             </div>
             <h2 className="text-4xl md:text-5xl font-bold text-white mb-6 leading-tight">
               Oltre il codice: <br />
@@ -64,8 +64,8 @@ const Philosophy: React.FC = () => {
           {/* Cards */}
           <div className="grid gap-6">
             {values.map((value, idx) => (
-              <div 
-                key={idx} 
+              <div
+                key={idx}
                 className="flex items-start p-6 bg-slate-900/50 backdrop-blur border border-slate-800 rounded-xl hover:border-brand-500/30 transition-colors group"
               >
                 <div className={`flex-shrink-0 p-3 rounded-lg ${value.bg} mr-6 group-hover:scale-110 transition-transform duration-300`}>

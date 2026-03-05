@@ -4,38 +4,38 @@ import { Quote, Star } from 'lucide-react';
 const testimonials = [
   {
     id: 1,
-    author: "Marco Valli",
-    role: "CEO, InnovaLogistics",
+    author: "Luigi Perazzi",
+    role: "Gava IFC S.p.A.",
     content: "L'attenzione al cliente di CodeTeam è impareggiabile. Non si sono limitati a eseguire specifiche, ma hanno lavorato al nostro fianco per perfezionare la visione del prodotto, trattando il nostro successo come il loro. Un partner vero, non solo un fornitore.",
-    category: "Customer Care"
+    category: "Freight forwarders and logistics"
   },
   {
     id: 2,
-    author: "Elena Bianchi",
-    role: "CTO, FinTech Solutions",
-    content: "La velocità di esecuzione è stata sorprendente. Ci serviva un MVP critico in 6 settimane; CodeTeam ha consegnato una soluzione stabile e scalabile in 4, permettendoci di andare a mercato in anticipo sulla concorrenza.",
-    category: "Speed & Delivery"
+    author: "Andrea Emiliani",
+    role: "BizLink S.R.L",
+    content: "CodeTeam ci affianca da diversi anni, avendo contribuito a costruire il nostro sistema gestionale esattamente come lo volevamo. L'interfacciamento del software al software MES e le robuste soluzioni mobile su smartphone per il magazzino ci hanno consentito di risparmiare tempo e soldi. ",
+    category: "Silicone Cable Solutions"
   },
   {
     id: 3,
-    author: "Roberto Ferri",
-    role: "Operations Manager, Manifattura 4.0",
-    content: "Avevamo un ecosistema frammentato di software legacy. CodeTeam ha progettato una soluzione di System Integration su misura che ha centralizzato i dati e automatizzato i flussi, risolvendo complessità che altri ritenevano impossibili da gestire.",
-    category: "System Integration"
+    author: "Fedele Pizzetti",
+    role: "Magri Gomme S.p.A",
+    content: "Lavoriamo con CodeTeam da molti anni ed abbiamo ottenuto nel tempo una soluzione software altamente customizzata e scalabile che sarebbe stata impossibile ottenere con software standard. Abbiamo affiancato soluzioni EDI e di System Integration su misura che hanno centralizzato i dati e automatizzato i flussi, risolvendo numerose complessità altrimenti non risolvibili.",
+    category: "Automotive"
   }
 ];
 
 const Testimonials: React.FC = () => {
   return (
-    <section id="testimonials" className="py-24 relative bg-slate-900 border-t border-slate-800">
+    <section id="dicono-di-noi" className="py-24 relative bg-slate-900 border-t border-slate-800">
       {/* Background decoration */}
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-brand-500/5 rounded-full blur-[120px] pointer-events-none"></div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-base text-brand-500 font-semibold tracking-wide uppercase">Dicono di noi</h2>
+          <h2 className="text-base text-brand-500 font-semibold tracking-wide uppercase">Feedback Clienti</h2>
           <p className="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
-            Risultati concreti, Clienti soddisfatti
+            Opinioni e Testimonianze su CodeTeam
           </p>
           <p className="mt-4 max-w-2xl text-xl text-slate-400 mx-auto">
             La fiducia dei nostri partner è il nostro asset più prezioso. Ecco come abbiamo fatto la differenza.

@@ -1,20 +1,107 @@
-import React from 'react';
-import { Mail, MapPin, Phone, Send } from 'lucide-react';
+import React, { useState, useMemo } from 'react';
+import { Mail, MapPin, Phone, Send, Calendar, AlertCircle } from 'lucide-react';
+
+/** Campi nell'ordine in cui gli errori vengono mostrati uno alla volta */
+const FIELD_ORDER: Array<'name' | 'email' | 'subject' | 'message'> = ['name', 'email', 'subject', 'message'];
+
+interface FormErrors {
+  name?: string;
+  email?: string;
+  subject?: string;
+  message?: string;
+}
+
+/** Badge di errore luminoso — appare uno alla volta, in ordine di campo */
+const ErrorBadge: React.FC<{ message: string }> = ({ message }) => (
+  <div
+    className="relative mt-2 flex items-center gap-2.5 px-3.5 py-2.5 rounded-lg overflow-hidden
+      text-red-300 text-xs font-semibold tracking-wide
+      border border-red-500/30
+      shadow-[0_0_18px_rgba(239,68,68,0.25),0_0_6px_rgba(239,68,68,0.15),inset_0_1px_0_rgba(255,255,255,0.05)]
+      animate-[errSlide_0.3s_cubic-bezier(0.16,1,0.3,1)_both]"
+    style={{ background: 'linear-gradient(135deg, rgba(127,29,29,0.55) 0%, rgba(69,10,10,0.35) 100%)' }}
+  >
+    {/* Shimmer sweep */}
+    <span
+      className="absolute inset-0 pointer-events-none"
+      style={{
+        background: 'linear-gradient(105deg, transparent 30%, rgba(255,100,100,0.08) 50%, transparent 70%)',
+        animation: 'errShimmer 2.5s ease-in-out infinite',
+      }}
+    />
+    {/* Pulsing icon */}
+    <span className="relative flex-shrink-0">
+      <AlertCircle className="w-3.5 h-3.5 text-red-400 drop-shadow-[0_0_6px_rgba(239,68,68,0.9)]" />
+      <span className="absolute inset-0 rounded-full bg-red-500/20 animate-ping" style={{ animationDuration: '1.8s' }} />
+    </span>
+    <span className="relative">{message}</span>
+  </div>
+);
 
 const Contact: React.FC = () => {
+  const [errors, setErrors] = useState<FormErrors>({});
+  const [touched, setTouched] = useState<Record<string, boolean>>({});
+
+  const validate = (fields: { name: string; email: string; subject: string; message: string }): FormErrors => {
+    const errs: FormErrors = {};
+    if (!fields.name.trim()) errs.name = 'Il nome è obbligatorio.';
+    if (!fields.email.trim()) {
+      errs.email = "L'email è obbligatoria.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fields.email.trim())) {
+      errs.email = "Inserisci un indirizzo email valido.";
+    }
+    if (!fields.subject.trim()) errs.subject = "L'oggetto è obbligatorio.";
+    if (!fields.message.trim()) errs.message = 'Il messaggio è obbligatorio.';
+    return errs;
+  };
+
+  /** Il primo campo (in ordine) che ha un errore visibile — solo quello viene mostrato */
+  const firstErrorField = useMemo(
+    () => FIELD_ORDER.find(f => errors[f] && touched[f]) ?? null,
+    [errors, touched]
+  );
+
+  const handleBlur = (e: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setTouched(prev => ({ ...prev, [e.target.name]: true }));
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    // Re-validate sempre, così quando correggi il primo errore appare quello successivo
+    const form = e.target.closest('form') as HTMLFormElement;
+    if (form) {
+      const data = new FormData(form);
+      const fields = {
+        name: data.get('name') as string || '',
+        email: data.get('email') as string || '',
+        subject: data.get('subject') as string || '',
+        message: data.get('message') as string || '',
+      };
+      const newErrors = validate(fields);
+      setErrors(newErrors);
+    }
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const formData = new FormData(e.currentTarget);
-    const name = formData.get('name') as string;
-    const email = formData.get('email') as string;
-    const subject = formData.get('subject') as string;
-    const message = formData.get('message') as string;
+    const fields = {
+      name: formData.get('name') as string || '',
+      email: formData.get('email') as string || '',
+      subject: formData.get('subject') as string || '',
+      message: formData.get('message') as string || '',
+    };
+
+    const newErrors = validate(fields);
+    setErrors(newErrors);
+    setTouched({ name: true, email: true, subject: true, message: true });
+
+    if (Object.keys(newErrors).length > 0) return;
 
     const emailTo = "info@codeteam.it";
-    const emailSubject = encodeURIComponent(subject || "Richiesta contatto da CodeTeam Web");
+    const emailSubject = encodeURIComponent(fields.subject || "Richiesta contatto da CodeTeam Web");
     const emailBody = encodeURIComponent(
-      `Nome: ${name}\nEmail: ${email}\n\nMessaggio:\n${message}`
+      `Nome: ${fields.name}\nEmail: ${fields.email}\n\nMessaggio:\n${fields.message}`
     );
 
     window.location.href = `mailto:${emailTo}?subject=${emailSubject}&body=${emailBody}`;
@@ -121,7 +208,7 @@ const Contact: React.FC = () => {
             {/* Subtle Scanning Line Animation across the form */}
             <div className="absolute top-0 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-brand-500/30 to-transparent -translate-x-full group-hover:animate-[shimmer_2s_infinite]"></div>
 
-            <form className="space-y-6 relative z-10" onSubmit={handleSubmit}>
+            <form className="space-y-6 relative z-10" onSubmit={handleSubmit} noValidate>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                 <div>
                   <label htmlFor="name" className="block text-sm font-medium text-slate-300">
@@ -131,10 +218,17 @@ const Contact: React.FC = () => {
                     type="text"
                     name="name"
                     id="name"
-                    required
-                    className="mt-2 block w-full rounded-lg bg-slate-950 border border-slate-700 text-white px-4 py-3 focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none focus:bg-slate-900 transition-all placeholder-slate-600 focus:shadow-[0_0_15px_rgba(249,115,22,0.1)]"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={`mt-2 block w-full rounded-lg bg-slate-950 border text-white px-4 py-3 focus:ring-1 focus:outline-none focus:bg-slate-900 transition-all placeholder-slate-600 ${errors.name && touched.name
+                      ? 'border-red-500/70 focus:border-red-500 focus:ring-red-500/50 shadow-[0_0_12px_rgba(239,68,68,0.15)]'
+                      : 'border-slate-700 focus:border-brand-500 focus:ring-brand-500 focus:shadow-[0_0_15px_rgba(249,115,22,0.1)]'
+                      }`}
                     placeholder="Mario Rossi"
                   />
+                  {firstErrorField === 'name' && (
+                    <ErrorBadge message={errors.name!} />
+                  )}
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-sm font-medium text-slate-300">
@@ -144,10 +238,17 @@ const Contact: React.FC = () => {
                     type="email"
                     name="email"
                     id="email"
-                    required
-                    className="mt-2 block w-full rounded-lg bg-slate-950 border border-slate-700 text-white px-4 py-3 focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none focus:bg-slate-900 transition-all placeholder-slate-600 focus:shadow-[0_0_15px_rgba(249,115,22,0.1)]"
+                    onChange={handleChange}
+                    onBlur={handleBlur}
+                    className={`mt-2 block w-full rounded-lg bg-slate-950 border text-white px-4 py-3 focus:ring-1 focus:outline-none focus:bg-slate-900 transition-all placeholder-slate-600 ${errors.email && touched.email
+                      ? 'border-red-500/70 focus:border-red-500 focus:ring-red-500/50 shadow-[0_0_12px_rgba(239,68,68,0.15)]'
+                      : 'border-slate-700 focus:border-brand-500 focus:ring-brand-500 focus:shadow-[0_0_15px_rgba(249,115,22,0.1)]'
+                      }`}
                     placeholder="mario@esempio.it"
                   />
+                  {firstErrorField === 'email' && (
+                    <ErrorBadge message={errors.email!} />
+                  )}
                 </div>
               </div>
 
@@ -159,10 +260,17 @@ const Contact: React.FC = () => {
                   type="text"
                   name="subject"
                   id="subject"
-                  required
-                  className="mt-2 block w-full rounded-lg bg-slate-950 border border-slate-700 text-white px-4 py-3 focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none focus:bg-slate-900 transition-all placeholder-slate-600 focus:shadow-[0_0_15px_rgba(249,115,22,0.1)]"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={`mt-2 block w-full rounded-lg bg-slate-950 border text-white px-4 py-3 focus:ring-1 focus:outline-none focus:bg-slate-900 transition-all placeholder-slate-600 ${errors.subject && touched.subject
+                    ? 'border-red-500/70 focus:border-red-500 focus:ring-red-500/50 shadow-[0_0_12px_rgba(239,68,68,0.15)]'
+                    : 'border-slate-700 focus:border-brand-500 focus:ring-brand-500 focus:shadow-[0_0_15px_rgba(249,115,22,0.1)]'
+                    }`}
                   placeholder="Informazioni sui servizi"
                 />
+                {firstErrorField === 'subject' && (
+                  <ErrorBadge message={errors.subject!} />
+                )}
               </div>
 
               <div>
@@ -173,19 +281,37 @@ const Contact: React.FC = () => {
                   id="message"
                   name="message"
                   rows={4}
-                  required
-                  className="mt-2 block w-full rounded-lg bg-slate-950 border border-slate-700 text-white px-4 py-3 focus:border-brand-500 focus:ring-brand-500 focus:ring-1 focus:outline-none focus:bg-slate-900 transition-all placeholder-slate-600 focus:shadow-[0_0_15px_rgba(249,115,22,0.1)]"
+                  onChange={handleChange}
+                  onBlur={handleBlur}
+                  className={`mt-2 block w-full rounded-lg bg-slate-950 border text-white px-4 py-3 focus:ring-1 focus:outline-none focus:bg-slate-900 transition-all placeholder-slate-600 ${errors.message && touched.message
+                    ? 'border-red-500/70 focus:border-red-500 focus:ring-red-500/50 shadow-[0_0_12px_rgba(239,68,68,0.15)]'
+                    : 'border-slate-700 focus:border-brand-500 focus:ring-brand-500 focus:shadow-[0_0_15px_rgba(249,115,22,0.1)]'
+                    }`}
                   placeholder="Scrivi qui il tuo messaggio..."
                 ></textarea>
+                {firstErrorField === 'message' && (
+                  <ErrorBadge message={errors.message!} />
+                )}
               </div>
 
-              <button
-                type="submit"
-                className="w-full inline-flex items-center justify-center px-6 py-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-brand-600 hover:bg-brand-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 focus:ring-offset-slate-900 transition-all shadow-lg shadow-brand-600/20 group-hover:shadow-brand-600/40"
-              >
-                Invia Messaggio
-                <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <button
+                  type="submit"
+                  className="w-full inline-flex items-center justify-center px-6 py-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-brand-600 hover:bg-brand-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 focus:ring-offset-slate-900 transition-all shadow-lg shadow-brand-600/20 group-hover:shadow-brand-600/40"
+                >
+                  Invia Messaggio
+                  <Send className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </button>
+                <a
+                  href="https://cal.com/stefano-pescini75"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full inline-flex items-center justify-center px-6 py-4 border border-transparent rounded-lg shadow-sm text-base font-medium text-white bg-brand-600 hover:bg-brand-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand-500 focus:ring-offset-slate-900 transition-all shadow-lg shadow-brand-600/20 group-hover:shadow-brand-600/40"
+                >
+                  Prenota una call
+                  <Calendar className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
             </form>
           </div>
 
@@ -271,6 +397,14 @@ const Contact: React.FC = () => {
         @keyframes neural-float {
           0%, 100% { transform: translateY(0) scale(1); }
           50% { transform: translateY(-10px) scale(1.02); }
+        }
+        @keyframes errSlide {
+          from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+          to   { opacity: 1; transform: translateY(0)   scale(1); }
+        }
+        @keyframes errShimmer {
+          0%        { transform: translateX(-100%); }
+          60%, 100% { transform: translateX(200%); }
         }
         .animate-map-pulse {
           animation: map-pulse 4s ease-in-out infinite;

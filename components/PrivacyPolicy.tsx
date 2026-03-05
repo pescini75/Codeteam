@@ -13,23 +13,23 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
   return (
     <section className="min-h-screen pt-24 pb-24 relative z-20">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        
+
         <div className="flex justify-center mb-8">
-            <button 
-                onClick={onBack}
-                className="inline-flex items-center px-4 py-2 rounded-full bg-slate-900/80 backdrop-blur text-white hover:bg-brand-600 transition-colors border border-slate-700 hover:border-brand-500 group"
-            >
-                <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
-                Torna alla Home
-            </button>
+          <button
+            onClick={onBack}
+            className="inline-flex items-center px-4 py-2 rounded-full bg-slate-900/80 backdrop-blur text-white hover:bg-brand-600 transition-colors border border-slate-700 hover:border-brand-500 group"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2 group-hover:-translate-x-1 transition-transform" />
+            Torna alla Home
+          </button>
         </div>
 
         <div className="bg-slate-900/90 backdrop-blur-sm border border-slate-800 rounded-2xl p-8 md:p-12 shadow-2xl">
-          
+
           <div className="border-b border-slate-800 pb-8 mb-8">
             <div className="flex items-center space-x-3 mb-4">
-               <Shield className="w-8 h-8 text-brand-500" />
-               <span className="text-brand-500 font-mono uppercase tracking-wider text-sm">Documentazione Legale</span>
+              <Shield className="w-8 h-8 text-brand-500" />
+              <span className="text-brand-500 font-mono uppercase tracking-wider text-sm">Documentazione Legale</span>
             </div>
             <h1 className="text-3xl md:text-5xl font-bold text-white mb-4">Privacy Policy</h1>
             <p className="text-slate-400">
@@ -38,14 +38,14 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
           </div>
 
           <div className="space-y-8 text-slate-300 leading-relaxed">
-            
+
             <section>
               <h2 className="text-xl font-bold text-white mb-3 flex items-center">
                 1. Titolare del Trattamento
               </h2>
               <p>
-                Il Titolare del trattamento dei dati è <strong>CodeTeam S.r.l.</strong> (di seguito "il Titolare"), con sede legale in Via Iseo, 6, 25030 Villa Pedergnano (BS).<br/>
-                Per qualsiasi chiarimento, informazione o per l'esercizio dei diritti elencati nella presente informativa, è possibile contattare il Titolare al seguente indirizzo email: <a href="mailto:privacy@codeteam.it" className="text-brand-500 hover:underline">privacy@codeteam.it</a>.
+                Il Titolare del trattamento dei dati è <strong>CodeTeam S.r.l.</strong> (di seguito "il Titolare"), con sede legale in Via Iseo, 6, 25030 Villa Pedergnano (BS).<br />
+                Per qualsiasi chiarimento, informazione o per l'esercizio dei diritti elencati nella presente informativa, è possibile contattare il Titolare al seguente indirizzo email: <a href="mailto:info@codeteam.it" className="text-brand-500 hover:underline">info@codeteam.it</a>.
               </p>
             </section>
 
@@ -96,10 +96,10 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
                 5. Modalità di Trattamento e Sicurezza
               </h2>
               <div className="flex items-start gap-4 p-4 bg-slate-950/50 backdrop-blur-sm rounded-lg border border-slate-800">
-                 <Lock className="w-6 h-6 text-brand-500 flex-shrink-0 mt-1" />
-                 <p className="text-sm">
-                   Il trattamento viene effettuato mediante strumenti informatici e/o telematici, con modalità organizzative e con logiche strettamente correlate alle finalità indicate. Specifiche misure di sicurezza sono osservate per prevenire la perdita dei dati, usi illeciti o non corretti ed accessi non autorizzati.
-                 </p>
+                <Lock className="w-6 h-6 text-brand-500 flex-shrink-0 mt-1" />
+                <p className="text-sm">
+                  Il trattamento viene effettuato mediante strumenti informatici e/o telematici, con modalità organizzative e con logiche strettamente correlate alle finalità indicate. Specifiche misure di sicurezza sono osservate per prevenire la perdita dei dati, usi illeciti o non corretti ed accessi non autorizzati.
+                </p>
               </div>
             </section>
 
@@ -112,7 +112,7 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
               </p>
             </section>
 
-             <section>
+            <section>
               <h2 className="text-xl font-bold text-white mb-3 flex items-center">
                 7. Periodo di Conservazione
               </h2>
@@ -130,20 +130,20 @@ const PrivacyPolicy: React.FC<PrivacyPolicyProps> = ({ onBack }) => {
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-slate-950/50 backdrop-blur-sm p-4 rounded-lg border border-slate-800">
-                   <strong className="text-white block mb-1">Accesso e Rettifica</strong>
-                   Chiedere la conferma dell'esistenza dei dati e ottenerne la rettifica se inesatti.
+                  <strong className="text-white block mb-1">Accesso e Rettifica</strong>
+                  Chiedere la conferma dell'esistenza dei dati e ottenerne la rettifica se inesatti.
                 </div>
                 <div className="bg-slate-950/50 backdrop-blur-sm p-4 rounded-lg border border-slate-800">
-                   <strong className="text-white block mb-1">Cancellazione (Oblio)</strong>
-                   Chiedere la cancellazione dei dati qualora non più necessari o in caso di revoca del consenso.
+                  <strong className="text-white block mb-1">Cancellazione (Oblio)</strong>
+                  Chiedere la cancellazione dei dati qualora non più necessari o in caso di revoca del consenso.
                 </div>
                 <div className="bg-slate-950/50 backdrop-blur-sm p-4 rounded-lg border border-slate-800">
-                   <strong className="text-white block mb-1">Limitazione</strong>
-                   Chiedere la limitazione del trattamento in determinate circostanze.
+                  <strong className="text-white block mb-1">Limitazione</strong>
+                  Chiedere la limitazione del trattamento in determinate circostanze.
                 </div>
                 <div className="bg-slate-950/50 backdrop-blur-sm p-4 rounded-lg border border-slate-800">
-                   <strong className="text-white block mb-1">Portabilità</strong>
-                   Ricevere i propri dati in un formato strutturato e leggibile da dispositivo automatico.
+                  <strong className="text-white block mb-1">Portabilità</strong>
+                  Ricevere i propri dati in un formato strutturato e leggibile da dispositivo automatico.
                 </div>
               </div>
             </section>
