@@ -1,0 +1,101 @@
+[
+  {
+    "id": 1,
+    "title": "Il futuro del Web Assembly",
+    "excerpt": "Come Web Assembly sta cambiando il modo in cui scriviamo applicazioni web ad alte prestazioni nel browser.",
+    "content": "<h2>Un cambio di paradigma per il web</h2><p>WebAssembly (Wasm) non è solo una nuova tecnologia; è un cambio di paradigma fondamentale per il web. Per anni, JavaScript è stato l'unico cittadino di prima classe nei browser. Ora, Wasm permette di eseguire codice compilato da linguaggi come <strong>C++, Rust e Go</strong> a velocità quasi native.</p><h2>Cosa diventa possibile</h2><p>Immagina di poter portare intere suite di editing video, motori di gioco 3D complessi o algoritmi di analisi dati direttamente nel browser, senza dipendere da server backend costosi. Questo è ciò che WebAssembly rende possibile oggi.</p><ul><li>Editing video e audio nel browser senza upload</li><li>Motori di gioco 3D con performance quasi native</li><li>Algoritmi di computer vision e ML lato client</li><li>Porting di applicazioni desktop su web</li></ul><h2>La nostra esperienza</h2><p>In CodeTeam stiamo già sperimentando con moduli <strong>Rust</strong> compilati in Wasm per gestire l'elaborazione di immagini lato client, riducendo il carico sui server del <strong>40%</strong> e migliorando la privacy degli utenti, poiché i dati non lasciano mai il loro dispositivo via rete.</p>",
+    "imageUrl": "https://images.unsplash.com/photo-1587620962725-abab7fe55159?q=80&w=2000&auto=format&fit=crop",
+    "date": "15 Ottobre 2023",
+    "readTime": "5 min",
+    "tags": [
+      "Performance",
+      "Web",
+      "Rust"
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Microservizi vs Monolite",
+    "excerpt": "Un'analisi approfondita su quando conviene spezzare la tua applicazione e quando invece il monolite è la scelta giusta.",
+    "content": "<h2>Il falso mito dei microservizi</h2><p>Il dibattito tra architettura a microservizi e monolitica è uno dei più accesi nel mondo dello sviluppo software. Spesso si tende a pensare che i microservizi siano sempre la soluzione migliore, ma la realtà è molto più sfumata.</p><h2>Quando scegliere il Monolite</h2><p>Un monolite <strong>ben strutturato</strong> è spesso la scelta ideale per le startup o per prodotti in fase iniziale. Offre:</p><ul><li>Semplicità di deployment e gestione</li><li>Debugging facilitato grazie al codice centralizzato</li><li>Performance di rete ottimali (zero latenza tra chiamate di funzione)</li><li>Cicli di sviluppo più veloci nelle fasi iniziali</li></ul><p>Tuttavia, quando il team scala oltre le <strong>20-30 persone</strong>, il monolite diventa un collo di bottiglia: i merge diventano conflittuali e il codice cresce in modo difficile da controllare.</p><h2>Quando scegliere i Microservizi</h2><p>I microservizi offrono scalabilità organizzativa e tecnica, permettendo a team diversi di lavorare su stack tecnologici diversi. Il costo? Una complessità operativa esponenziale. Serve un'infrastruttura solida di:</p><ul><li>CI/CD pipeline automatizzate</li><li>Monitoraggio distribuito (es. Jaeger, Datadog)</li><li>Gestione robusta dei fallimenti di rete (circuit breakers)</li></ul><blockquote>La scelta non è ideologica, è pragmatica: valuta la dimensione del tuo team e il grado di maturità del prodotto.</blockquote>",
+    "imageUrl": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2000&auto=format&fit=crop",
+    "date": "02 Novembre 2023",
+    "readTime": "8 min",
+    "tags": [
+      "Backend",
+      "Scalability",
+      "DevOps"
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Ottimizzare React per la velocità",
+    "excerpt": "Tecniche avanzate di memoizzazione e rendering per garantire un'esperienza utente fulminea.",
+    "content": "<h2>React è veloce, ma può essere più veloce</h2><p>React è veloce di natura, ma applicazioni complesse possono rallentare facilmente se non si presta attenzione al ciclo di rendering. Il Virtual DOM fa un ottimo lavoro, ma ricalcolare l'intero albero dei componenti ad ogni tasto premuto è uno spreco di risorse.</p><h2>Memoizzazione: il tuo migliore alleato</h2><p>Utilizzare <code>React.memo</code>, <code>useMemo</code> e <code>useCallback</code> non è solo \"zucchero sintattico\", ma è fondamentale per prevenire re-render inutili.</p><ul><li><strong>React.memo</strong>: evita il re-render di componenti figli se le props non cambiano</li><li><strong>useMemo</strong>: memorizza il risultato di calcoli costosi</li><li><strong>useCallback</strong>: stabilizza i riferimenti alle funzioni passate come props</li></ul><h2>Virtualizzazione delle liste</h2><p>Quando si devono mostrare migliaia di elementi, renderizzarli tutti insieme bloccherà il browser. Librerie come <strong>react-window</strong> o <strong>react-virtual</strong> permettono di renderizzare solo ciò che è visibile nel viewport.</p><h2>Code Splitting</h2><p>Il Code Splitting tramite <code>React.lazy</code> e <code>Suspense</code> permette di caricare il codice JavaScript solo quando serve, riducendo drasticamente il <strong>Time to Interactive (TTI)</strong> iniziale.</p><pre><code>const HeavyComponent = React.lazy(() => import('./HeavyComponent'));\n\n&lt;Suspense fallback={&lt;Spinner /&gt;}&gt;\n  &lt;HeavyComponent /&gt;\n&lt;/Suspense&gt;</code></pre>",
+    "imageUrl": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?q=80&w=2000&auto=format&fit=crop",
+    "date": "10 Dicembre 2023",
+    "readTime": "6 min",
+    "tags": [
+      "JavaScript",
+      "Optimization",
+      "UX"
+    ]
+  },
+  {
+    "id": 4,
+    "title": "Sicurezza nelle API REST",
+    "excerpt": "Best practices per proteggere i tuoi endpoint: autenticazione, rate limiting e validazione input.",
+    "content": "<h2>La sicurezza non è una feature opzionale</h2><p>La sicurezza delle API non è una feature, è un requisito fondamentale. Esporre un endpoint pubblico significa esporre la logica di business al mondo intero. Le vulnerabilità più comuni non sono bug complessi, ma <strong>configurazioni errate</strong>.</p><h2>Il primo layer: Autenticazione e Autorizzazione</h2><p>Il primo passo è sempre l'autenticazione robusta. Lo standard moderno è <strong>OAuth 2.0</strong> con token <strong>JWT</strong>. Ricorda:</p><ul><li>I token JWT devono avere una scadenza breve (es. 15 minuti)</li><li>Implementa sempre un meccanismo di refresh token</li><li>Non memorizzare token sensibili in localStorage (preferisci cookie HttpOnly)</li></ul><h2>Rate Limiting e Brute-force Protection</h2><p>Il <strong>Rate Limiting</strong> è essenziale per prevenire attacchi DDoS e brute-force. Limita le richieste per IP e per utente, e implementa backoff esponenziale dopo tentativi falliti.</p><h2>Validazione dell'input</h2><p>Validare rigorosamente ogni input in ingresso (<em>mai fidarsi del client!</em>) previene attacchi di:</p><ul><li><strong>SQL Injection</strong>: usa sempre query parametrizzate o ORM</li><li><strong>XSS</strong>: sanifica l'output prima di renderizzarlo</li><li><strong>Path Traversal</strong>: whitelist i percorsi di file accettati</li></ul><blockquote>La sicurezza è un processo continuo, non un prodotto da installare. Effettua audit periodici e mantieni le dipendenze aggiornate.</blockquote><h2>Headers e HTTPS</h2><p>Utilizza <strong>HTTPS</strong> ovunque e configura correttamente gli header di sicurezza: <code>Content-Security-Policy</code>, <code>X-Frame-Options</code>, <code>Strict-Transport-Security</code>.</p>",
+    "imageUrl": "https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=2000&auto=format&fit=crop",
+    "date": "15 Gennaio 2024",
+    "readTime": "7 min",
+    "tags": [
+      "Backend",
+      "API",
+      "CyberSec"
+    ]
+  },
+  {
+    "id": 5,
+    "title": "L'ascesa dell'AI nel Coding",
+    "excerpt": "Come strumenti come Copilot e ChatGPT stanno cambiando il flusso di lavoro quotidiano degli sviluppatori.",
+    "content": "<h2>Una rivoluzione silenziosa nel workflow</h2><p>L'intelligenza artificiale <strong>non sostituirà i programmatori</strong>, ma i programmatori che usano l'AI sostituiranno quelli che non lo fanno. Strumenti come <strong>GitHub Copilot</strong>, <strong>Antigravity</strong> e <strong>Claude Code</strong> agiscono come \"pair programmer\" instancabili, suggerendo boilerplate, test unitari e persino refactoring complessi.</p><h2>L'AI come amplificatore di competenze</h2><p>La chiave è capire che questi strumenti sono <em>assistenti</em>, non oracoli. Il codice generato va sempre revisionato. Tuttavia, la produttività aumenta drasticamente:</p><ul><li>Meno tempo su StackOverflow e documentazione di base</li><li>Generazione di test automatici in secondi</li><li>Refactoring intelligente di codice legacy</li><li>Più spazio al pensiero architetturale e alla risoluzione di problemi complessi</li></ul><h2>Il Vibe Coding: un nuovo paradigma</h2><p>Con l'avvento di IDE agentici come Antigravity e Claude Code, si entra in uno stato di flusso dove l'attenzione si sposta dal <em>\"come scrivere il codice\"</em> al <em>\"cosa vogliamo realizzare\"</em>. Il modello diventa un partner con cui dialogare in linguaggio naturale.</p><h2>La democratizzazione dello sviluppo</h2><p>Stiamo assistendo alla democratizzazione dello sviluppo software, dove la barriera all'ingresso si abbassa, ma la <strong>richiesta di competenze di alto livello</strong> per orchestrare questi sistemi cresce in modo esponenziale.</p>",
+    "imageUrl": "https://images.unsplash.com/photo-1677442136019-21780ecad995?q=80&w=2000&auto=format&fit=crop",
+    "date": "22 Gennaio 2024",
+    "readTime": "4 min",
+    "tags": [
+      "AI",
+      "Productivity",
+      "Future"
+    ]
+  },
+  {
+    "id": 6,
+    "title": "Design System Scalabili",
+    "excerpt": "Creare un linguaggio visivo coerente che cresce insieme al tuo prodotto e al tuo team.",
+    "content": "<h2>Cos'è davvero un Design System</h2><p>Un Design System è molto più di una libreria di componenti UI in Figma o React. È il <strong>linguaggio comune</strong> che permette a designer e sviluppatori di comunicare senza ambiguità. Definisce non solo l'aspetto (colori, tipografia, spaziature), ma anche il <em>comportamento</em> e le regole di utilizzo dei componenti.</p><h2>Token, Atomi, Molecole, Organismi</h2><p>Creare un sistema scalabile significa adottare la metodologia dell'<strong>Atomic Design</strong>:</p><ul><li><strong>Token</strong>: le particelle elementari (colori HEX, dimensioni in px, font-weight)</li><li><strong>Atomi</strong>: componenti minimi e autonomi (Button, Input, Icon)</li><li><strong>Molecole</strong>: combinazioni di atomi (SearchBar = Input + Button)</li><li><strong>Organismi</strong>: sezioni complesse della UI (Header, ProductCard, Form)</li></ul><h2>Il vantaggio della scalabilità</h2><p>Questo approccio atomico garantisce che, se domani decidi di cambiare il colore primario del brand, la modifica si propaghi istantaneamente in tutta l'applicazione senza dover cercare e sostituire manualmente codici esadecimali in centinaia di file.</p><blockquote>Un Design System non è un progetto che si conclude, è un prodotto che evolve insieme al tuo team e ai tuoi utenti.</blockquote><h2>Strumenti consigliati</h2><ul><li><strong>Figma Variables</strong> per i design token nel mondo design</li><li><strong>Storybook</strong> per documentare e testare i componenti React</li><li><strong>CSS Custom Properties</strong> o <strong>Tailwind config</strong> per i token nel codice</li></ul>",
+    "imageUrl": "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=2000&auto=format&fit=crop",
+    "date": "05 Febbraio 2024",
+    "readTime": "6 min",
+    "tags": [
+      "UI/UX",
+      "Frontend",
+      "Workflow"
+    ]
+  },
+  {
+    "id": 7,
+    "title": "Genexus Next",
+    "excerpt": "GeneXus Next è la nuova evoluzione della piattaforma GeneXus, progettata per semplificare e velocizzare lo sviluppo di applicazioni grazie all’utilizzo del paradigma low-code e dell’intelligenza artificiale",
+    "content": "<h1>GeneXus Next: sviluppo software più veloce con il low-code</h1><p>GeneXus Next è la nuova evoluzione della piattaforma GeneXus, progettata per semplificare e velocizzare lo sviluppo di applicazioni grazie all’utilizzo del paradigma <strong>low-code</strong> e dell’<strong>intelligenza artificiale</strong>.</p><h2>Cos’è GeneXus Next</h2><p>GeneXus Next è una piattaforma che permette agli sviluppatori di creare applicazioni descrivendo il funzionamento del sistema invece di scrivere manualmente tutto il codice. Il software analizza queste informazioni e <strong>genera automaticamente gran parte del codice necessario</strong>.</p><p>Questo approccio riduce i tempi di sviluppo e facilita la creazione di applicazioni anche molto complesse.</p><h2>Come funziona</h2><p>Il funzionamento di GeneXus Next si basa su un modello chiamato <strong>knowledge-based development</strong>. Gli sviluppatori definiscono:</p><ol><li><span style=\"color: rgb(203, 213, 225);\">. dati e strutture del sistema</span></li><li><span style=\"color: rgb(203, 213, 225);\">. regole di business</span></li><li><span style=\"color: rgb(203, 213, 225);\">. interfacce utente</span></li><li><span style=\"color: rgb(203, 213, 225);\">. processi dell’applicazione</span></li></ol><p>La piattaforma utilizza queste informazioni per generare applicazioni per diverse piattaforme, come:</p><ul><li><p>. applicazioni web</p></li><li><p>. app mobile</p></li><li><p>. sistemi aziendali</p></li><li><p>. servizi cloud</p></li></ul><h2>Vantaggi principali</h2><p>L’utilizzo di GeneXus Next offre diversi vantaggi:</p><ul><li><p><strong>- sviluppo più rapido delle applicazioni</strong></p></li><li><p><strong>- riduzione dei costi di manutenzione</strong></p></li><li><p><strong>- maggiore produttività dei programmatori</strong></p></li><li><p><strong>- compatibilità con più tecnologie e piattaforme</strong></p></li></ul><h2>Conclusione</h2><p>GeneXus Next rappresenta una nuova generazione di strumenti di sviluppo software. Grazie all’integrazione tra <strong>low-code e intelligenza artificiale</strong>, permette alle aziende di creare applicazioni più velocemente e di adattarsi più facilmente ai cambiamenti tecnologici.</p>",
+    "imageUrl": "https://i.ytimg.com/vi/ev67g3UI_gM/maxresdefault.jpg",
+    "date": "05 marzo 2026",
+    "readTime": "5 min",
+    "tags": [
+      "Genexus",
+      "Globant",
+      "Tech",
+      "Low Code"
+    ]
+  }
+]
